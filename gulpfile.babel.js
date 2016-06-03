@@ -15,7 +15,7 @@ const envs = {
 }
 
 let env = envs.DEV; // Default DEV
-let port = env == envs.TEST ? 8010 : 8000;
+let port = env == envs.TEST ? 3010 : 3000;
 
 const showFileUpdated = (files) => {
   console.log('File(s) updated :');
