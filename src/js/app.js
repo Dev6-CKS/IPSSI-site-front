@@ -1,15 +1,18 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Locations } from 'react-router-component'
-import { Location } from 'react-router-component'
+import { Router, Route, IndexRoute } from 'react-router'
 
 //Components
+import Wrapper from './components/Wrapper'
 import Home from './components/home/Home'
 
-const App = () => (
-	<Locations hash>
-  	<Location path="/" handler={Home} />
-	</Locations>
+const App = ({ history }) => (
+  <Router history={history}>
+    <Route path='/'>
+      <Route component={Wrapper}>
+        <IndexRoute component={Home}/>
+      </Route>
+    </Route>
+  </Router>
 )
 
-ReactDOM.render(<App/>, document.querySelector('#container'))
+export default App

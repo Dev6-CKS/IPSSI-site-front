@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { map, kebabCase } from 'lodash'
+import { kebabCase } from 'lodash'
 
-import Filter from '../common/Filter'
+import Filter from '../commons/Filter'
 
 const sliderItem = [
   {
@@ -49,13 +49,13 @@ class Slider extends Component{
           <div className="Slider_prev fa fa-chevron-left" onClick={() => this.prev()}/>
           <div className={`Slider_pause fa fa-${pause ? 'pause' : 'play'}`} onClick={() => this.setState({ pause: !pause })}/>
           <ul className="Slider">
-            {map(sliderItem, (item, i) => this.displaySliderItem(item, i, currentId === item.id))}
+            {sliderItem.map((item, i) => this.displaySliderItem(item, i, currentId === item.id))}
           </ul>
           <div className="Slider_next fa fa-chevron-right" onClick={() => this.next()}/>
         </div>
         <div className="Slider_menu_wrapper">
           <ul className="Slider_menu">
-            {map(sliderItem, (item, i, items) => this.displaySliderMenuItem(item, i, items, currentId === item.id, hoverMenuId === item.id))}
+            {sliderItem.map((item, i, items) => this.displaySliderMenuItem(item, i, items, currentId === item.id, hoverMenuId === item.id))}
           </ul>
         </div>
       </div>

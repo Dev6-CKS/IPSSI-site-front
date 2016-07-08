@@ -6,7 +6,7 @@ import browserSync from 'browser-sync'
 import babelify from 'babelify'
 import source from 'vinyl-source-stream'
 
-import {handleErrors} from './gulpHandleErrors'
+import { handleErrors } from './gulp-handle-errors'
 
 const envs = {
   DEV  : "DEV",
@@ -34,7 +34,7 @@ gulp.task('browser-sync', function() {
     open: env == envs.TEST ? false : true,
     port: port,
     server: {
-      baseDir: "./"
+      baseDir: "./dist"
     }
   })
 })
@@ -43,30 +43,30 @@ gulp.task('less', () => {
   gulp.src('src/style/main.less')
     .pipe(less({strictMath: true}).on('error', handleErrors))
     .pipe(browserSync.reload({stream:true}))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./dist/style'));
 })
 
 gulp.task('watch', ['browser-sync'], () => {
   gulp.watch('src/style/**/*.less', ['less']);
 
   const watcher = watchify(browserify({
-      entries: ['./src/js/app.js'],
-      transform: [babelify],
-      debug: true,
-      cache: {}, packageCache: {}, fullPaths: true
+    entries: ['./src/js/index.js'],
+    transform: [babelify],
+    debug: true,
+    cache: {}, packageCache: {}, fullPaths: true
   }));
 
   return watcher.on('update', (files) => {
-      watcher.bundle().on('error', handleErrors)
-          .pipe(source('main.js'))
-          .pipe(gulp.dest('./'))
-      showFileUpdated(files);
+    watcher.bundle().on('error', handleErrors)
+      .pipe(source('main.js'))
+      .pipe(gulp.dest('./dist/js'))
+    showFileUpdated(files);
   })
   .bundle()
   .pipe(source('main.js'))
-  .pipe(gulp.dest('./'));
+  .pipe(gulp.dest('./dist/js'));
 })
 
 gulp.task('default', ['watch'], () => {
-  gulp.watch("./src/js/main.js").on('change', browserSync.reload)
+  gulp.watch("./src/js/**/*.js").on('change', browserSync.reload)
 })

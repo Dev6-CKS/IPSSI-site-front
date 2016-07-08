@@ -1,8 +1,11 @@
 {
-  "name": "ipssi-site-font",
+  "name": "dataface-front",
   "version": "1.0.0",
-  "description": "IPSSI Project: Site Front",
+  "description": "",
   "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dev6-CKS/IPSSI-site-front.git"
@@ -13,35 +16,37 @@
     "url": "https://github.com/Dev6-CKS/IPSSI-site-front/issues"
   },
   "homepage": "https://github.com/Dev6-CKS/IPSSI-site-front#readme",
-  "babel": {
-    "presets": [
-      "react",
-      "es2015"
-    ]
-  },
   "dependencies": {
-    "flux": "^2.1.1",
+    "babel-polyfill": "^6.9.1",
+    "babel-runtime": "^6.9.2",
+    "es6-promise": "^3.2.1",
+    "history": "2.0.0",
     "lodash": "^4.13.1",
-    "object-assign": "^4.1.0",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-router-component": "^0.32.2",
-    "superagent": "^2.0.0"
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-responsive": "^2.1.1",
+    "redux-saga": "^0.10.5",
+    "superagent": "^2.0.0",
+    "superagent-promise-plugin": "^3.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.9.1",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-stage-0": "^6.5.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-register": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.12.10",
+    "browser-sync": "^2.13.0",
     "browserify": "^13.0.1",
-    "envify": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-less": "^3.1.0",
     "gulp-notify": "^2.2.0",
-    "less": "^2.7.1",
-    "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   }

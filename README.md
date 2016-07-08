@@ -1,12 +1,12 @@
-# IPSSI-site-front
+# DataFace
 
 ##Installation :
 
   Clone the project
-  `git clone git@github.com:Dev6-CKS/IPSSI-site-front.git`
+  `git clone git@github.com:stevecarrasco/dataface-front.git`
 
   Open the folder
-  `cd IPSSI-site-front`
+  `cd dataface-front`
 
   Webpack installatiion:
   `npm install gulp -g`
@@ -18,4 +18,4 @@
   `gulp`
 
   Open the following link in your browser:
-  `http://localhost:8000`
+  `http://localhost:3000`
