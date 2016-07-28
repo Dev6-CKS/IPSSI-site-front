@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 
 import Filter from '../commons/Filter'
 
@@ -8,21 +8,21 @@ const sliderItem = [
     id: 1,
     title: 'Lorem ipsum dolor sit amet.',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.',
-    src: 'images/home/desktop-mac-2.jpg',
+    src: 'assets/images/home/desktop-mac-2.jpg',
     link: '/articles/lorem-ipsum'
   },
   {
     id: 2,
     title: 'Lorem ipsum.',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.',
-    src: 'images/home/b6972e09ad5bf832a831ca2f6200e358.jpg',
+    src: 'assets/images/home/b6972e09ad5bf832a831ca2f6200e358.jpg',
     link: '/articles/lorem-ipsum'
   },
   {
     id: 3,
     title: 'Lorem ipsum jygfhjyhj.',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.',
-    src: 'images/home/02_b.jpg',
+    src: 'assets/images/home/02_b.jpg',
     link: '/articles/lorem-ipsum'
   }
 ]
@@ -107,7 +107,7 @@ class Slider extends Component{
       const { hoverSliderId, pause } = this.state
       if (hoverSliderId || pause) return
       this.next()
-    }, 3000)
+    }, 5000)
   }
 
   componentWillUnmount() {

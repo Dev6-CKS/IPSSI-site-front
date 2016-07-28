@@ -5,68 +5,107 @@ import browserify from 'browserify'
 import browserSync from 'browser-sync'
 import babelify from 'babelify'
 import source from 'vinyl-source-stream'
+import gulpImage from 'gulp-image'
 
 import { handleErrors } from './gulp-handle-errors'
 
-const envs = {
-  DEV  : "DEV",
-  TEST : "TEST",
-  PROD : "PROD"
-}
+//Paths
+const srcPath = './src'
 
-let env = envs.DEV; // Default DEV
-let port = env == envs.TEST ? 3010 : 3000;
+const srcStylePath = srcPath + '/style'
+const srcJsPath = srcPath + '/js'
+const srcIndexPath = srcPath + '/index.html'
+const srcAssetsPath = srcPath + '/assets'
+
+const srcMainLessPath = srcStylePath + '/main.less'
+const srcAllLessPath = srcStylePath + '/**/*.less'
+
+const srcMainJsPath = srcJsPath + '/index.js'
+const srcAllJsPath = srcJsPath + '/**/*.js'
+
+const srcImagesPath = srcAssetsPath + '/images/**/*'
+
+const distPath = './dist'
+
+const distStylePath = distPath + '/style'
+const distJSPath = distPath + '/js'
+const distIndexPath = distPath + '/index.html'
+const distAssetsPath = distPath + '/assets'
+
+const distImagesPath = distAssetsPath + '/images'
+
 
 const showFileUpdated = (files) => {
-  console.log('File(s) updated :');
+  console.log('File(s) updated :')
   files.forEach((file) => {
-    console.log('-' + file);
+    console.log('-' + file)
   })
 }
 
 const reactifyES6 = (file) => {
-  return reactify(file, {'es6': true});
+  return reactify(file, {'es6': true})
 }
 
 gulp.task('browser-sync', function() {
   browserSync.init({
-    target: "localhost:" + port,
-    open: env == envs.TEST ? false : true,
-    port: port,
-    server: {
-      baseDir: "./dist"
-    }
+    target: "localhost:3000",
+    open: true,
+    port: 3000,
+    server: { baseDir: "./dist" }
   })
 })
 
 gulp.task('less', () => {
-  gulp.src('src/style/main.less')
+  gulp.src(srcMainLessPath)
     .pipe(less({strictMath: true}).on('error', handleErrors))
     .pipe(browserSync.reload({stream:true}))
-    .pipe(gulp.dest('./dist/style'));
+    .pipe(gulp.dest(distStylePath))
 })
 
 gulp.task('watch', ['browser-sync'], () => {
-  gulp.watch('src/style/**/*.less', ['less']);
+  gulp.watch(srcAllLessPath, ['less'])
 
   const watcher = watchify(browserify({
-    entries: ['./src/js/index.js'],
+    entries: [srcMainJsPath],
     transform: [babelify],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
-  }));
+  }))
 
   return watcher.on('update', (files) => {
     watcher.bundle().on('error', handleErrors)
       .pipe(source('main.js'))
-      .pipe(gulp.dest('./dist/js'))
-    showFileUpdated(files);
+      .pipe(gulp.dest(distJSPath))
+    showFileUpdated(files)
   })
   .bundle()
   .pipe(source('main.js'))
-  .pipe(gulp.dest('./dist/js'));
+  .pipe(gulp.dest(distJSPath))
 })
 
-gulp.task('default', ['watch'], () => {
-  gulp.watch("./src/js/**/*.js").on('change', browserSync.reload)
+gulp.task('js', () => {
+  browserify(srcMainJsPath)
+  .transform('babelify', { presets: ["es2015", "react"] })
+  .bundle()
+  .pipe(source('main.js'))
+  .pipe(gulp.dest(distJSPath))
 })
+
+gulp.task('image', () => {
+  gulp.src(srcImagesPath)
+    .pipe(gulpImage())
+    .pipe(gulp.dest(distImagesPath))
+})
+
+gulp.task('assets', ['image'])
+
+gulp.task('copyIndexHtml', () => {
+  gulp.src(srcIndexPath)
+    .pipe(gulp.dest(distPath));
+})
+
+gulp.task('default', ['copyIndexHtml', 'watch'], () => {
+  gulp.watch(srcAllJsPath).on('change', browserSync.reload)
+})
+
+gulp.task('prod', ['copyIndexHtml', 'less', 'js', 'assets'])
