@@ -3,6 +3,7 @@ import { map, kebabCase } from 'lodash'
 
 //Components
 import Slider from './Slider'
+import Presentation from './Presentation'
 
 const navBarItems = [
   {name: "Accueil", link: '/home'},
@@ -34,6 +35,7 @@ class Home extends Component{
           <ul className="Navbar">{map(navBarItems, (item, i) => <NavItem key={`nav-item-${i}`} item={item}/>)}</ul>
         </nav>
         <Slider/>
+        <Presentation/>
       </div>
     )
   }

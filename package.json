@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Dev6-CKS/IPSSI-site-front#readme",
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
     "babel-runtime": "^6.9.2",
     "es6-promise": "^3.2.1",
     "history": "2.0.0",

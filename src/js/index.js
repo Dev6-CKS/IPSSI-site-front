@@ -15,10 +15,11 @@ import App from './app'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const store = configureStore(appHistory)
+const history = syncHistoryWithStore(appHistory, store)
 
 render(
   <Provider store={store}>
-    <App history={appHistory}/>
+    <App history={history}/>
   </Provider>,
   document.getElementById('container')
 )
