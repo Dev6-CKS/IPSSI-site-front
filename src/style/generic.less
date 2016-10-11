@@ -3,9 +3,6 @@
 .input{
 }
 
-.button{
-}
-
 //Vertical align
 .valign {
   position : relative;
@@ -23,19 +20,19 @@
 }
 
 .transitions(@prop : all; @duration : .5s; @easing : ease) {
-    -webkit-transition          : @prop @duration @easing;
-    -moz-transition             : @prop @duration @easing;
-    -ms-transition              : @prop @duration @easing;
-    -o-transition               : @prop @duration @easing;
-    transition                  : @prop @duration @easing;
+  -webkit-transition          : @prop @duration @easing;
+  -moz-transition             : @prop @duration @easing;
+  -ms-transition              : @prop @duration @easing;
+  -o-transition               : @prop @duration @easing;
+  transition                  : @prop @duration @easing;
 }
 
 .blur(@value : 5px){
-    -webkit-filter: blur(@value);
-    -moz-filter: blur(@value);
-    -o-filter: blur(@value);
-    -ms-filter: blur(@value);
-    filter: blur(@value);
+  -webkit-filter: blur(@value);
+  -moz-filter: blur(@value);
+  -o-filter: blur(@value);
+  -ms-filter: blur(@value);
+  filter: blur(@value);
 }
 
 .dotDotDot{
@@ -47,20 +44,20 @@
 }
 
 .boxShadow(@value : 5px 5px 7px #000){
-    -moz-box-shadow: @value;
-    -webkit-box-shadow: @value;
-    box-shadow: @value;
+  -moz-box-shadow: @value;
+  -webkit-box-shadow: @value;
+  box-shadow: @value;
 }
 
 .clickable {
   &:hover {
-    cursor                  : pointer;
+    cursor: pointer;
   }
   &:focus {
-    cursor                  : pointer;
+    cursor: pointer;
   }
   &:active {
-    cursor                  : pointer;
+    cursor: pointer;
   }
 }
 

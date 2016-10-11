@@ -5,7 +5,7 @@ import browserify from 'browserify'
 import browserSync from 'browser-sync'
 import babelify from 'babelify'
 import source from 'vinyl-source-stream'
-import gulpImage from 'gulp-image'
+import imagemin from 'gulp-imagemin'
 
 import { handleErrors } from './gulp-handle-errors'
 
@@ -13,6 +13,7 @@ import { handleErrors } from './gulp-handle-errors'
 const srcPath = './src'
 
 const srcStylePath = srcPath + '/style'
+const srcStyleExternPath = srcPath + '/style-extern/*'
 const srcJsPath = srcPath + '/js'
 const srcIndexPath = srcPath + '/index.html'
 const srcAssetsPath = srcPath + '/assets'
@@ -24,6 +25,7 @@ const srcMainJsPath = srcJsPath + '/index.js'
 const srcAllJsPath = srcJsPath + '/**/*.js'
 
 const srcImagesPath = srcAssetsPath + '/images/**/*'
+const srcFontsPath = srcAssetsPath + '/fonts/**/*'
 
 const distPath = './dist'
 
@@ -33,6 +35,7 @@ const distIndexPath = distPath + '/index.html'
 const distAssetsPath = distPath + '/assets'
 
 const distImagesPath = distAssetsPath + '/images'
+const distFontsPath = distAssetsPath + '/fonts'
 
 
 const showFileUpdated = (files) => {
@@ -93,23 +96,25 @@ gulp.task('js', () => {
 
 gulp.task('image', () => {
   gulp.src(srcImagesPath)
-    .pipe(gulpImage())
+    .pipe(imagemin())
     .pipe(gulp.dest(distImagesPath))
 })
 
-gulp.task('assets', ['image'])
+gulp.task('fonts', () => {
+  gulp.src(srcFontsPath)
+    .pipe(gulp.dest(distFontsPath))
+})
+
+gulp.task('assets', ['image', 'fonts'])
 
 gulp.task('copyIndexHtml', () => {
   gulp.src(srcIndexPath)
-    .pipe(gulp.dest(distPath));
+    .pipe(gulp.dest(distPath))
 })
 
 gulp.task('default', ['copyIndexHtml', 'watch'], () => {
   gulp.run('js')
   gulp.run('less')
   gulp.run('assets')
-  gulp.run('copyIndexHtml')
   gulp.watch(srcAllJsPath).on('change', browserSync.reload)
 })
-
-gulp.task('prod', ['copyIndexHtml', 'less', 'js', 'assets'])

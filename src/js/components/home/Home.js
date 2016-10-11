@@ -3,7 +3,8 @@ import { map, kebabCase } from 'lodash'
 
 //Components
 import Slider from './Slider'
-import Presentation from './Presentation'
+import Presentations from './Presentations'
+import LookingForAJob from './LookingForAJob'
 
 const navBarItems = [
   {name: "Accueil", link: '/home'},
@@ -35,7 +36,39 @@ class Home extends Component{
           <ul className="Navbar">{map(navBarItems, (item, i) => <NavItem key={`nav-item-${i}`} item={item}/>)}</ul>
         </nav>
         <Slider/>
-        <Presentation/>
+        <Presentations/>
+        <LookingForAJob/>
+        <footer className="Footer">
+          <ul className="Company_infos">
+            <li className="Info_item">
+              <span className="fa fa-map-marker"/>
+              6 Place Charles Hernu, <b>69100 Villeurbanne Lyon</b>
+            </li>
+            <li className="Info_item">
+              <span className="fa fa-phone"/>
+              <b>04 82 53 81 64</b>
+            </li>
+            <li className="Info_item">
+              <span className="fa fa-envelope"/>
+              <b>ip-formation@contact.fr</b>
+            </li>
+          </ul>
+          <div className="About_company">
+            <b>À propos de nous</b>
+            <p>Lorem ipsum Excepteur in laborum mollit proident irure amet laborum minim dolore in et mollit minim minim.</p>
+            <ul className="Social_networks">
+              <li className="fa fa-facebook"/>
+              <li className="fa fa-twitter"/>
+              <li className="fa fa-linkedin"/>
+              <li className="fa fa-github"/>
+            </ul>
+          </div>
+          <div className="Contact_us">
+            <b>Nous contacter</b>
+            <input type="text" className="input-text"/>
+            <textarea className="input-text"/>
+          </div>
+        </footer>
       </div>
     )
   }
